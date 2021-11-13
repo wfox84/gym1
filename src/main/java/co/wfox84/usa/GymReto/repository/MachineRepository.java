@@ -33,8 +33,12 @@ public class MachineRepository {
     
     }
     
-    public Machine save(Machine m){
+    public Machine save(Machine machine){
     
-        return machineCrudRepository.save(m);
+        return machineCrudRepository.save(machine);
+    }
+
+    public void delete(Machine machine){
+        machineCrudRepository.delete(machine);
     }
 }

@@ -31,19 +31,45 @@ public class MessageService {
             return messageRepository.getMessage(id);
     }
    
-    public Message save(Message  me){
-        if(me.getIdMessage()==null){
-            return messageRepository.save(me);        
+    public Message save(Message  message){
+        if(message.getIdMessage()==null){
+            return messageRepository.save(message);
         }else{
-            Optional<Message> maux=messageRepository.getMessage(me.getIdMessage());
+            Optional<Message> maux=messageRepository.getMessage(message.getIdMessage());
             if(maux.isEmpty()){
-                return messageRepository.save(me);            
+                return messageRepository.save(message);
             }else{
-                return me;
+                return message;
             
             }
         
         }
     
+    }
+    public Message update(Message message) {
+        if (message.getIdMessage()!= null) {
+            Optional<Message> e = messageRepository.getMessage(message.getIdMessage());
+            if (!e.isEmpty()) {
+                if (message.getMessageText()!= null) {
+                    e.get().setMessageText(message.getMessageText());
+                    e.get().setClient(message.getClient());
+                    e.get().setMachine(message.getMachine());
+                }
+                messageRepository.save(e.get());
+                return e.get();
+
+            } else {
+                return message;
+            }
+        } else {
+            return message;
+        }
+    }
+    public boolean deleteMessage(int idMessage) {
+        Boolean aBoolean = getMessage(idMessage).map(message -> {
+            messageRepository.delete(message);
+            return true;
+        }).orElse(false);
+        return aBoolean;
     }
 }

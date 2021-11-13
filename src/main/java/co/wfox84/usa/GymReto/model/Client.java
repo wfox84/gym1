@@ -14,9 +14,7 @@ import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
 
 /**
  * 
@@ -34,7 +32,7 @@ public class Client implements Serializable{
     private String name;
     private Integer age;
     
-    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "client")
+    @OneToMany (cascade = {CascadeType.PERSIST },mappedBy = "client")
     @JsonIgnoreProperties("client")
     public List<Message> messages;
     

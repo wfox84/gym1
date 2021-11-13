@@ -5,7 +5,7 @@
  */
 package co.wfox84.usa.GymReto.model;
 
-import java.io.Serializable;
+
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
@@ -32,22 +32,20 @@ public class Machine implements Serializable {
     private String name;
     private String brand;
     private Integer year;
-    //private Integer category_id;
-    
     private String description;
 
     
     @ManyToOne
-    @JoinColumn (name="categoryIde")
+    @JoinColumn (name="idCategory")
     @JsonIgnoreProperties("machines")
     private Category category;
     
     @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "machine")
-    @JsonIgnoreProperties("machine")
+    @JsonIgnoreProperties({"machine", "client"})
     public List<Message> messages;
     
     @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "machine")
-    @JsonIgnoreProperties("machine")
+    @JsonIgnoreProperties({"machine", "client"})
     public List<Reservation> reservations;
 
     public Integer getId() {

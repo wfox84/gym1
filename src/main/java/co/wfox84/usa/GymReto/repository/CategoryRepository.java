@@ -6,6 +6,7 @@
 package co.wfox84.usa.GymReto.repository;
 
 import co.wfox84.usa.GymReto.model.Category;
+import co.wfox84.usa.GymReto.model.Reservation;
 import co.wfox84.usa.GymReto.repository.crud.CategoryCrudRepository;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +37,9 @@ public class CategoryRepository {
     public Category save(Category ca){
     
         return categoryCrudRepository.save(ca);
+    }
+    public void delete(Category category){
+        categoryCrudRepository.delete(category);
     }
     
 }

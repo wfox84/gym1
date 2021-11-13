@@ -6,6 +6,7 @@
 package co.wfox84.usa.GymReto.repository;
 
 import co.wfox84.usa.GymReto.model.Client;
+import co.wfox84.usa.GymReto.model.Reservation;
 import co.wfox84.usa.GymReto.repository.crud.ClientCrudRepository;
 import java.util.List;
 import java.util.Optional;
@@ -36,5 +37,8 @@ public class ClientRepository {
     public Client save(Client c){
     
         return clientCrudRepository.save(c);
+    }
+    public void delete(Client client){
+        clientCrudRepository.delete(client);
     }
 }

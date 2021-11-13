@@ -8,6 +8,7 @@ package co.wfox84.usa.GymReto.repository;
 
 
 import co.wfox84.usa.GymReto.model.Message;
+import co.wfox84.usa.GymReto.model.Reservation;
 import co.wfox84.usa.GymReto.repository.crud.MessageCrudRepository;
 import java.util.List;
 import java.util.Optional;
@@ -38,5 +39,8 @@ public class MessageRepository {
     public Message save(Message me){
     
         return messageCrudRepository.save(me);
+    }
+    public void delete(Message message){
+        messageCrudRepository.delete(message);
     }
 }
