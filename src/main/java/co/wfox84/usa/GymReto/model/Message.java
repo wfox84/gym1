@@ -26,17 +26,7 @@ public class Message implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
-    private String MessageText;
-    
-    @ManyToOne
-    @JoinColumn (name="idMachine")
-    @JsonIgnoreProperties({"messages","client","reservations"})
-    private Machine machine;
-    
-    @ManyToOne
-    @JoinColumn (name="idClient")
-    @JsonIgnoreProperties({"messages","reservations","client"})
-    private Client client;
+    private String messageText;
 
     public Integer getIdMessage() {
         return idMessage;
@@ -47,11 +37,11 @@ public class Message implements Serializable{
     }
 
     public String getMessageText() {
-        return MessageText;
+        return messageText;
     }
 
-    public void setMessageText(String MessageText) {
-        this.MessageText = MessageText;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
     public Machine getMachine() {
@@ -69,6 +59,18 @@ public class Message implements Serializable{
     public void setClient(Client client) {
         this.client = client;
     }
+
+    @ManyToOne
+    @JoinColumn (name="idMachine")
+    @JsonIgnoreProperties({"messages","client","reservations"})
+    private Machine machine;
+    
+    @ManyToOne
+    @JoinColumn (name="idClient")
+    @JsonIgnoreProperties({"messages","reservations","client"})
+    private Client client;
+
+
 
     
 }
