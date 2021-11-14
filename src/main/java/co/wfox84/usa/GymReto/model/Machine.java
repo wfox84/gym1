@@ -36,8 +36,8 @@ public class Machine implements Serializable {
 
     
     @ManyToOne
-    //@JoinColumn (name="idCategory")
-    @JoinColumn(name="id",updatable = false,insertable = false)
+    @JoinColumn (name="idCategory")
+   // @JoinColumn(name="id",updatable = false,insertable = false)
     @JsonIgnoreProperties("machines")
     private Category category;
     
@@ -112,6 +112,4 @@ public class Machine implements Serializable {
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
-
-    
 }

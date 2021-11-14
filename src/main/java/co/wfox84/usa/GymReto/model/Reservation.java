@@ -17,40 +17,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * 
+ *
  * @author masterKomodoro
  */
 @Entity
 @Table(name="Reservation")
 public class Reservation implements Serializable{
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+
     private Integer idReservation;
     private Date startDate;
     private Date devolutionDate;
     private String status="created";
-    
-    @ManyToOne
-    @JoinColumn(name = "id")
-    @JsonIgnoreProperties("reservations")
-    private Machine machine;
-
-    @ManyToOne
-    @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties({"reservations","messages"})
-    private Client client;
-
-    private String score;
-
-    public String getScore() {
-        return score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
-    }
 
     public Integer getIdReservation() {
         return idReservation;
@@ -100,5 +80,27 @@ public class Reservation implements Serializable{
         this.client = client;
     }
 
-    
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties("reservations")
+    private Machine machine;
+
+    @ManyToOne
+    @JoinColumn(name = "idClient")
+    @JsonIgnoreProperties({"reservations","messages"})
+    private Client client;
+
+    private String score;
+
+
+
+
 }
