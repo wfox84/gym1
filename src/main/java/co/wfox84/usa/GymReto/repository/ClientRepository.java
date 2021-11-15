@@ -6,8 +6,7 @@
 package co.wfox84.usa.GymReto.repository;
 
 import co.wfox84.usa.GymReto.model.Client;
-import co.wfox84.usa.GymReto.model.Reservation;
-import co.wfox84.usa.GymReto.repository.crud.ClientCrudRepository;
+import co.wfox84.usa.GymReto.crudrepository.ClientCrudRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +27,15 @@ public class ClientRepository {
         return (List<Client>) clientCrudRepository.findAll();
     
     }
-    public Optional<Client> getClient(int id){
+    public Optional<Client> getClient(int idClient){
     
-        return clientCrudRepository.findById(id);
+        return clientCrudRepository.findById(idClient);
     
     }
     
-    public Client save(Client c){
+    public Client save(Client client){
     
-        return clientCrudRepository.save(c);
+        return clientCrudRepository.save(client);
     }
     public void delete(Client client){
         clientCrudRepository.delete(client);

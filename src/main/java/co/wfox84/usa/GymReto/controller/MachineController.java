@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.wfox84.usa.GymReto.web;
+package co.wfox84.usa.GymReto.controller;
 
-import co.wfox84.usa.GymReto.model.Client;
-import co.wfox84.usa.GymReto.service.ClientService;
+import co.wfox84.usa.GymReto.model.Machine;
+import co.wfox84.usa.GymReto.service.MachineService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,40 +18,39 @@ import org.springframework.web.bind.annotation.*;
  * @author masterKomodoro
  */
 @RestController
-@RequestMapping("/api/Client")
+@RequestMapping("/api/Machine")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class ClientController {
- 
+public class MachineController {
+    
     @Autowired
-    private ClientService clientService;
+    private MachineService machineService;
     
     @GetMapping("/all")
-    public List<Client> getClient(){
-        return clientService.getAll();    
+    public List<Machine> getMachine(){
+        return machineService.getAll();    
     }
     @GetMapping("/{id}")
-    public Optional<Client> getClient(@PathVariable("id") int id){
-        return clientService.getClient(id);
-    
+    public Optional<Machine> getMachine(@PathVariable("id") int id){
+        return machineService.getMachine(id);
     }
-    
+
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client c){
-        return clientService.save(c);
+    public Machine save(@RequestBody Machine machine){
+        return machineService.save(machine);
     
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client update(@RequestBody Client client){
-        return clientService.update(client);
+    public Machine update(Machine machine){
+        return machineService.update(machine);
+
     }
 
-    @DeleteMapping("/{idClient}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("idClient") int idClient){
-        return clientService.deleteClient(idClient);
+    public boolean delete(@PathVariable("id") int id) {
+        return machineService.deleteMachine(id);
     }
-
 }

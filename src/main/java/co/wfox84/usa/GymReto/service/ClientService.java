@@ -50,22 +50,22 @@ public class ClientService {
 
     public Client update(Client client) {
         if (client.getIdClient() != null) {
-            Optional<Client> e = clientRepository.getClient(client.getIdClient());
-            if (!e.isEmpty()) {
+            Optional<Client> cli = clientRepository.getClient(client.getIdClient());
+            if (!cli.isEmpty()) {
                 if (client.getEmail() != null) {
-                    e.get().setEmail(client.getEmail());
+                    cli.get().setEmail(client.getEmail());
                 }
                 if (client.getPassword() != null) {
-                    e.get().setPassword(client.getPassword());
+                    cli.get().setPassword(client.getPassword());
                 }
                 if (client.getName() != null) {
-                    e.get().setName(client.getName());
+                    cli.get().setName(client.getName());
                 }
                 if (client.getAge() != null) {
-                    e.get().setAge(client.getAge());
+                    cli.get().setAge(client.getAge());
                 }
-                clientRepository.save(e.get());
-                return e.get();
+                clientRepository.save(cli.get());
+                return cli.get();
             } else {
                 return client;
             }

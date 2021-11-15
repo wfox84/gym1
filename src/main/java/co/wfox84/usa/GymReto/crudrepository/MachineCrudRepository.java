@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.wfox84.usa.GymReto.repository.crud;
+package co.wfox84.usa.GymReto.crudrepository;
 
 import co.wfox84.usa.GymReto.model.Machine;
 import org.springframework.data.repository.CrudRepository;

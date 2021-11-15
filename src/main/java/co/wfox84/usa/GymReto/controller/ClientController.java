@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.wfox84.usa.GymReto.web;
+package co.wfox84.usa.GymReto.controller;
 
-import co.wfox84.usa.GymReto.model.Category;
 import co.wfox84.usa.GymReto.model.Client;
-import co.wfox84.usa.GymReto.service.CategoryService;
 import co.wfox84.usa.GymReto.service.ClientService;
 import java.util.List;
 import java.util.Optional;
@@ -20,38 +18,39 @@ import org.springframework.web.bind.annotation.*;
  * @author masterKomodoro
  */
 @RestController
-@RequestMapping("/api/Category")
+@RequestMapping("/api/Client")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class CategoryController {
-    
+public class ClientController {
+ 
     @Autowired
-    private CategoryService categoryService;
+    private ClientService clientService;
     
     @GetMapping("/all")
-    public List<Category> getCategory(){
-        return categoryService.getAll();    
+    public List<Client> getClient(){
+        return clientService.getAll();    
     }
+
     @GetMapping("/{id}")
-    public Optional<Category> getCategory(@PathVariable("id") int id){
-        return categoryService.getCategory(id);
-    
-    }    
+    public Optional<Client> getClient(@PathVariable("id") int id){
+        return clientService.getClient(id);
+    }
     
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Category save(@RequestBody Category category){
-        return categoryService.save(category);
-    
-    }
-    @PutMapping("/update")
-    @ResponseStatus(HttpStatus.CREATED)
-    public  Category update (@RequestBody Category category){
-        return categoryService.update(category);
+    public Client save(@RequestBody Client client){
+        return clientService.save(client);
     }
 
-    @DeleteMapping("{/id}")
+    @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public boolean delete(@PathVariable("id") int id){
-        return categoryService.deleteCategory(id);
+    public Client update(@RequestBody Client client){
+        return clientService.update(client);
     }
+
+    @DeleteMapping("/{idClient}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int idClient){
+        return clientService.deleteClient(idClient);
+    }
+
 }

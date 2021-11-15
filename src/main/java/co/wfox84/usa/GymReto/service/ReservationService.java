@@ -30,23 +30,22 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
     
     public List<Reservation> getAll(){
-        
         return reservationRepository.getAll();
     }
         
-    public Optional<Reservation> getReservation(int id){
-            return reservationRepository.getReservation(id);
+    public Optional<Reservation> getReservation(int idReservation){
+            return reservationRepository.getReservation(idReservation);
     }
    
-    public Reservation save(Reservation  r){
-        if(r.getIdReservation()==null){
-            return reservationRepository.save(r);        
+    public Reservation save(Reservation  reservation){
+        if(reservation.getIdReservation()==null){
+            return reservationRepository.save(reservation);
         }else{
-            Optional<Reservation> maux=reservationRepository.getReservation(r.getIdReservation());
-            if(maux.isEmpty()){
-                return reservationRepository.save(r);            
+            Optional<Reservation> reser1=reservationRepository.getReservation(reservation.getIdReservation());
+            if(reser1.isEmpty()){
+                return reservationRepository.save(reservation);
             }else{
-                return r;
+                return reservation;
             
             }
         
@@ -55,19 +54,19 @@ public class ReservationService {
     }
     public Reservation update(Reservation reservation) {
         if (reservation.getIdReservation() != null) {
-            Optional<Reservation> e = reservationRepository.getReservation(reservation.getIdReservation());
-            if (!e.isEmpty()) {
+            Optional<Reservation> reser = reservationRepository.getReservation(reservation.getIdReservation());
+            if (!reser.isEmpty()) {
                 if (reservation.getStartDate() != null) {
-                    e.get().setStartDate(reservation.getStartDate());
+                    reser.get().setStartDate(reservation.getStartDate());
                 }
                 if (reservation.getDevolutionDate() != null) {
-                    e.get().setDevolutionDate(reservation.getDevolutionDate());
+                    reser.get().setDevolutionDate(reservation.getDevolutionDate());
                 }
                 if (reservation.getStatus() != null) {
-                    e.get().setStatus(reservation.getStatus());
+                    reser.get().setStatus(reservation.getStatus());
                 }
-                reservationRepository.save(e.get());
-                return e.get();
+                reservationRepository.save(reser.get());
+                return reser.get();
             } else {
                 return reservation;
             }
@@ -89,7 +88,7 @@ public class ReservationService {
     }
     public List<Reservation> getReservationPeriod(String dataA, String dataB){
         SimpleDateFormat parser= new SimpleDateFormat("yyyy-MM-dd");
-        Date aDate =new Date();
+        Date aDate = new Date();
         Date bDate = new Date();
         try{
             aDate=parser.parse(dataA);

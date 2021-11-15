@@ -34,20 +34,6 @@ public class Machine implements Serializable {
     private Integer year;
     private String description;
 
-    
-    @ManyToOne
-    @JoinColumn (name="idCategory")
-   // @JoinColumn(name="id",updatable = false,insertable = false)
-    @JsonIgnoreProperties("machines")
-    private Category category;
-    
-    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "machine")
-    @JsonIgnoreProperties({"machine", "client"})
-    public List<Message> messages;
-    
-    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "machine")
-    @JsonIgnoreProperties({"machine", "client"})
-    public List<Reservation> reservations;
 
     public Integer getId() {
         return id;
@@ -112,4 +98,19 @@ public class Machine implements Serializable {
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
+
+    @ManyToOne
+    @JoinColumn (name="idCategory")
+    @JsonIgnoreProperties("machines")
+    private Category category;
+    
+    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "machine")
+    @JsonIgnoreProperties({"machine", "client"})
+    public List<Message> messages;
+    
+    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "machine")
+    @JsonIgnoreProperties({"machine", "client"})
+    public List<Reservation> reservations;
+
+
 }

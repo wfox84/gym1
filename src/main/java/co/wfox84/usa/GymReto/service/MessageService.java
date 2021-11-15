@@ -23,12 +23,11 @@ public class MessageService {
     private MessageRepository messageRepository;
     
     public List<Message> getAll(){
-        
         return messageRepository.getAll();
     }
         
-    public Optional<Message> getMessage(int id){
-            return messageRepository.getMessage(id);
+    public Optional<Message> getMessage(int idMessage){
+            return messageRepository.getMessage(idMessage);
     }
    
     public Message save(Message  message){
@@ -48,15 +47,15 @@ public class MessageService {
     }
     public Message update(Message message) {
         if (message.getIdMessage()!= null) {
-            Optional<Message> e = messageRepository.getMessage(message.getIdMessage());
-            if (!e.isEmpty()) {
+            Optional<Message> mess1 = messageRepository.getMessage(message.getIdMessage());
+            if (!mess1.isEmpty()) {
                 if (message.getMessageText()!= null) {
-                    e.get().setMessageText(message.getMessageText());
-                    e.get().setClient(message.getClient());
-                    e.get().setMachine(message.getMachine());
+                    mess1.get().setMessageText(message.getMessageText());
+                    mess1.get().setClient(message.getClient());
+                    mess1.get().setMachine(message.getMachine());
                 }
-                messageRepository.save(e.get());
-                return e.get();
+                messageRepository.save(mess1.get());
+                return mess1.get();
 
             } else {
                 return message;

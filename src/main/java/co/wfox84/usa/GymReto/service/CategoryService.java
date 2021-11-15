@@ -6,13 +6,9 @@
 package co.wfox84.usa.GymReto.service;
 
 import co.wfox84.usa.GymReto.model.Category;
-import co.wfox84.usa.GymReto.model.Reservation;
-import co.wfox84.usa.GymReto.reports.CounterClient;
 import co.wfox84.usa.GymReto.repository.CategoryRepository;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,30 +36,27 @@ public class CategoryService {
         if(category.getId()==null){
             return categoryRepository.save(category);
         }else{
-            Optional<Category> ct=categoryRepository.getCategory(category.getId());
-            if(ct.isEmpty()){
+            Optional<Category> cate=categoryRepository.getCategory(category.getId());
+            if(cate.isEmpty()){
                 return categoryRepository.save(category);
             }else{
                 return category;
-            
             }
-        
         }
-    
     }
 
     public Category update(Category category) {
         if (category.getId() != null) {
-            Optional<Category> g = categoryRepository.getCategory(category.getId());
-            if (!g.isEmpty()) {
+            Optional<Category> cate1 = categoryRepository.getCategory(category.getId());
+            if (!cate1.isEmpty()) {
                 if (category.getDescription() != null) {
-                    g.get().setDescription(category.getDescription());
+                    cate1.get().setDescription(category.getDescription());
                 }
                 if (category.getName() != null) {
-                    g.get().setName(category.getName());
+                    cate1.get().setName(category.getName());
                 }
-                categoryRepository.save(g.get());
-                return g.get();
+                categoryRepository.save(cate1.get());
+                return cate1.get();
             } else {
                 return category;
             }

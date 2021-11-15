@@ -5,7 +5,7 @@
  */
 package co.wfox84.usa.GymReto.repository;
 
-import co.wfox84.usa.GymReto.repository.crud.MachineCrudRepository;
+import co.wfox84.usa.GymReto.crudrepository.MachineCrudRepository;
 import co.wfox84.usa.GymReto.model.Machine;
 import java.util.List;
 import java.util.Optional;
@@ -23,18 +23,14 @@ public class MachineRepository {
     private MachineCrudRepository machineCrudRepository;
     
     public List<Machine> getAll(){
-        
         return (List<Machine>) machineCrudRepository.findAll();
-    
     }
+
     public Optional<Machine> getMachine(int id){
-    
         return machineCrudRepository.findById(id);
-    
     }
     
     public Machine save(Machine machine){
-    
         return machineCrudRepository.save(machine);
     }
 

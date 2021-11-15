@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.wfox84.usa.GymReto.web;
+package co.wfox84.usa.GymReto.controller;
 
-import co.wfox84.usa.GymReto.model.Machine;
-import co.wfox84.usa.GymReto.service.MachineService;
+import co.wfox84.usa.GymReto.model.Category;
+import co.wfox84.usa.GymReto.service.CategoryService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,40 +18,39 @@ import org.springframework.web.bind.annotation.*;
  * @author masterKomodoro
  */
 @RestController
-@RequestMapping("/api/Machine")
+@RequestMapping("/api/Category")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class MachineController {
+public class CategoryController {
     
     @Autowired
-    private MachineService machineService;
+    private CategoryService categoryService;
     
     @GetMapping("/all")
-    public List<Machine> getMachine(){
-        return machineService.getAll();    
-    }
-    @GetMapping("/{id}")
-    public Optional<Machine> getMachine(@PathVariable("id") int id){
-        return machineService.getMachine(id);
-    
+    public List<Category> getCategory(){
+        return categoryService.getAll();    
     }
 
+    @GetMapping("/{id}")
+    public Optional<Category> getCategory(@PathVariable("id") int idCategory){
+        return categoryService.getCategory(idCategory);
+    
+    }    
+    
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine save(@RequestBody Machine machine){
-        return machineService.save(machine);
+    public Category save(@RequestBody Category category){
+        return categoryService.save(category);
     
     }
-
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine update(Machine machine){
-        return machineService.update(machine);
-
+    public  Category update (@RequestBody Category category){
+        return categoryService.update(category);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("idMachine") int idMachine) {
-        return machineService.deleteMachine(idMachine);
+    public boolean delete(@PathVariable("id") int id){
+        return categoryService.deleteCategory(id);
     }
 }

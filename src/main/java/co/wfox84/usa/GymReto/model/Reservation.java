@@ -100,7 +100,4 @@ public class Reservation implements Serializable{
 
     private String score;
 
-
-
-
 }

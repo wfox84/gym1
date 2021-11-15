@@ -8,8 +8,7 @@ package co.wfox84.usa.GymReto.repository;
 
 
 import co.wfox84.usa.GymReto.model.Message;
-import co.wfox84.usa.GymReto.model.Reservation;
-import co.wfox84.usa.GymReto.repository.crud.MessageCrudRepository;
+import co.wfox84.usa.GymReto.crudrepository.MessageCrudRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

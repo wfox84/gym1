@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.wfox84.usa.GymReto.web;
+package co.wfox84.usa.GymReto.controller;
 
 import co.wfox84.usa.GymReto.model.Message;
 import co.wfox84.usa.GymReto.service.MessageService;
@@ -29,16 +29,17 @@ public class MessageController {
     public List<Message> getMessage(){
         return messageService.getAll();    
     }
-    @GetMapping("/{id}")
-    public Optional<Message> getMessage(@PathVariable("id") int id){
-        return messageService.getMessage(id);
+
+    @GetMapping("/{idMessage}")
+    public Optional<Message> getMessage(@PathVariable("id") int idMessage){
+        return messageService.getMessage(idMessage);
     
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message save(@RequestBody Message me){
-        return messageService.save(me);
+    public Message save(@RequestBody Message message){
+        return messageService.save(message);
     
     }
 

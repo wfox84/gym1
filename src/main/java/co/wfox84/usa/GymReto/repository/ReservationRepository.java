@@ -8,7 +8,7 @@ package co.wfox84.usa.GymReto.repository;
 import co.wfox84.usa.GymReto.model.Client;
 import co.wfox84.usa.GymReto.model.Reservation;
 import co.wfox84.usa.GymReto.reports.CounterClient;
-import co.wfox84.usa.GymReto.repository.crud.ReservationCrudRepository;
+import co.wfox84.usa.GymReto.crudrepository.ReservationCrudRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,18 +28,13 @@ public class ReservationRepository {
     private ReservationCrudRepository reservationCrudRepository;
     
     public List<Reservation> getAll(){
-        
         return (List<Reservation>) reservationCrudRepository.findAll();
-    
     }
     public Optional<Reservation> getReservation(int id){
-    
         return reservationCrudRepository.findById(id);
-    
     }
     
     public Reservation save(Reservation r){
-    
         return reservationCrudRepository.save(r);
     }
     public void delete(Reservation reservation){
@@ -53,13 +48,13 @@ public class ReservationRepository {
         return reservationCrudRepository.findAllByStartDateAfterAndStartDateBefore(a,b);
     }
     public List<CounterClient> getTopClient(){
-        List<CounterClient> res= new ArrayList<>();
+        List<CounterClient> reser= new ArrayList<>();
         List<Object[]> report = reservationCrudRepository.countTotalReservationByClient();
         for (int i=0; i<report.size();i++){
-            res.add(new CounterClient((Long)report.get(i)[1],(Client) report.get(i)[0]));
+            reser.add(new CounterClient((Long)report.get(i)[1],(Client) report.get(i)[0]));
 
         }
-        return res;
+        return reser;
     }
     
 }

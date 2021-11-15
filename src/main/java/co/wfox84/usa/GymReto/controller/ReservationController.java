@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.wfox84.usa.GymReto.web;
+package co.wfox84.usa.GymReto.controller;
 
-import co.wfox84.usa.GymReto.model.Machine;
 import co.wfox84.usa.GymReto.model.Reservation;
 import co.wfox84.usa.GymReto.reports.CounterClient;
 import co.wfox84.usa.GymReto.reports.StatusReservation;
-import co.wfox84.usa.GymReto.service.MachineService;
 import co.wfox84.usa.GymReto.service.ReservationService;
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/Reservation")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class ReservationController {
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}) public class ReservationController {
     
     @Autowired
     private ReservationService reservationService;
@@ -33,16 +30,16 @@ public class ReservationController {
     public List<Reservation> getReservation(){
         return reservationService.getAll();    
     }
-    @GetMapping("/{id}")
-    public Optional<Reservation> getReservation(@PathVariable("id") int id){
-        return reservationService.getReservation(id);
+    @GetMapping("/{idReservation}")
+    public Optional<Reservation> getReservation(@PathVariable("idReservation") int idReservation){
+        return reservationService.getReservation(idReservation);
     
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservation save(@RequestBody Reservation r){
-        return reservationService.save(r);
+    public Reservation save(@RequestBody Reservation reservation){
+        return reservationService.save(reservation);
     
     }
 
@@ -52,7 +49,7 @@ public class ReservationController {
         return reservationService.update(reservation);
     }
 
-    @DeleteMapping("/{idReservation}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("idReservation") int idReservation){
         return reservationService.deleteReservation(idReservation);
