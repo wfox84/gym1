@@ -22,55 +22,91 @@ import javax.persistence.Table;
 @Entity
 @Table(name="message")
 public class Message implements Serializable{
-    
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
     private String messageText;
 
+    /**
+     *
+     * @return
+     */
     public Integer getIdMessage() {
         return idMessage;
     }
 
+    /**
+     *
+     * @param idMessage
+     */
     public void setIdMessage(Integer idMessage) {
         this.idMessage = idMessage;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessageText() {
         return messageText;
     }
 
+    /**
+     *
+     * @param messageText
+     */
     public void setMessageText(String messageText) {
         this.messageText = messageText;
     }
 
+    /**
+     *
+     * @return
+     */
     public Machine getMachine() {
         return machine;
     }
 
+    /**
+     *
+     * @param machine
+     */
     public void setMachine(Machine machine) {
         this.machine = machine;
     }
 
+    /**
+     *
+     * @return
+     */
     public Client getClient() {
         return client;
     }
 
+    /**
+     *
+     * @param client
+     */
     public void setClient(Client client) {
         this.client = client;
     }
 
+    /**
+     *
+     */
     @ManyToOne
     @JoinColumn (name="idMachine")
     @JsonIgnoreProperties({"messages","client","reservations"})
     private Machine machine;
-    
+    /**
+     *
+      */
     @ManyToOne
     @JoinColumn (name="idClient")
     @JsonIgnoreProperties({"messages","reservations","client"})
     private Client client;
 
-
-
-    
 }

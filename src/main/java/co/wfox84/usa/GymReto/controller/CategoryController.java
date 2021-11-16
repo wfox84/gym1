@@ -21,36 +21,64 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/Category")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class CategoryController {
-    
+    /**
+     *
+     */
     @Autowired
     private CategoryService categoryService;
-    
+
+    /**
+     *
+     * @return
+     */
     @GetMapping("/all")
     public List<Category> getCategory(){
         return categoryService.getAll();    
     }
 
+    /**
+     *
+     * @param idCategory
+     * @return
+     */
     @GetMapping("/{id}")
     public Optional<Category> getCategory(@PathVariable("id") int idCategory){
         return categoryService.getCategory(idCategory);
     
-    }    
-    
+    }
+
+    /**
+     *
+     * @param category
+     * @return
+     */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Category save(@RequestBody Category category){
         return categoryService.save(category);
     
     }
+
+    /**
+     *
+     * @param category
+     * @return
+     */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public  Category update (@RequestBody Category category){
         return categoryService.update(category);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id){
         return categoryService.deleteCategory(id);
     }
+
 }

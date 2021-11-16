@@ -21,26 +21,47 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/Machine")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class MachineController {
-    
+    /**
+     *
+     */
     @Autowired
     private MachineService machineService;
-    
+
+    /**
+     *
+     * @return
+     */
     @GetMapping("/all")
     public List<Machine> getMachine(){
         return machineService.getAll();    
     }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public Optional<Machine> getMachine(@PathVariable("id") int id){
         return machineService.getMachine(id);
     }
 
+    /**
+     *
+     * @param machine
+     * @return
+     */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Machine save(@RequestBody Machine machine){
         return machineService.save(machine);
-    
     }
 
+    /**
+     *
+     * @param machine
+     * @return
+     */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Machine update(Machine machine){
@@ -48,9 +69,15 @@ public class MachineController {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id) {
         return machineService.deleteMachine(id);
     }
+
 }

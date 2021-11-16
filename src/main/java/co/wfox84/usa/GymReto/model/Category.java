@@ -23,50 +23,84 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Category")
 public class Category implements Serializable {
-    
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String description;
-    
-    
+
+    /**
+     *
+     */
     @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "category")
     @JsonIgnoreProperties("category")
     public List<Machine> machines;
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Machine> getMachines() {
         return machines;
     }
 
+    /**
+     *
+     * @param machines
+     */
     public void setMachines(List<Machine> machines) {
         this.machines = machines;
     }
 
-    
-    
 }

@@ -18,22 +18,42 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class MachineRepository {
-    
+    /**
+     *
+     */
     @Autowired
     private MachineCrudRepository machineCrudRepository;
-    
+
+    /**
+     *
+     * @return
+     */
     public List<Machine> getAll(){
         return (List<Machine>) machineCrudRepository.findAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Optional<Machine> getMachine(int id){
         return machineCrudRepository.findById(id);
     }
-    
+
+    /**
+     *
+     * @param machine
+     * @return
+     */
     public Machine save(Machine machine){
         return machineCrudRepository.save(machine);
     }
 
+    /**
+     *
+     * @param machine
+     */
     public void delete(Machine machine){
         machineCrudRepository.delete(machine);
     }

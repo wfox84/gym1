@@ -23,30 +23,63 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ReservationRepository {
-    
+    /**
+     *
+     */
     @Autowired
     private ReservationCrudRepository reservationCrudRepository;
-    
+
+    /**
+     *
+     * @return
+     */
     public List<Reservation> getAll(){
         return (List<Reservation>) reservationCrudRepository.findAll();
     }
     public Optional<Reservation> getReservation(int id){
         return reservationCrudRepository.findById(id);
     }
-    
+
+    /**
+     *
+     * @param r
+     * @return
+     */
     public Reservation save(Reservation r){
         return reservationCrudRepository.save(r);
     }
+
+    /**
+     *
+     * @param reservation
+     */
     public void delete(Reservation reservation){
         reservationCrudRepository.delete(reservation);
     }
 
+    /**
+     *
+     * @param status
+     * @return
+     */
     public List<Reservation> getReservationByStatus(String status){
         return  reservationCrudRepository.findAllByStatus(status);
     }
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public List<Reservation> getReservationPeriod (Date a, Date b){
         return reservationCrudRepository.findAllByStartDateAfterAndStartDateBefore(a,b);
     }
+
+    /**
+     *
+     * @return
+     */
     public List<CounterClient> getTopClient(){
         List<CounterClient> reser= new ArrayList<>();
         List<Object[]> report = reservationCrudRepository.countTotalReservationByClient();

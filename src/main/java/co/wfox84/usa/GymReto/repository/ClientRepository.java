@@ -18,26 +18,49 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ClientRepository {
-    
+    /**
+     *
+     */
     @Autowired
     private ClientCrudRepository clientCrudRepository;
-    
+
+    /**
+     *
+     * @return
+     */
     public List<Client> getAll(){
         
         return (List<Client>) clientCrudRepository.findAll();
     
     }
+
+    /**
+     *
+     * @param idClient
+     * @return
+     */
     public Optional<Client> getClient(int idClient){
     
         return clientCrudRepository.findById(idClient);
     
     }
-    
+
+    /**
+     *
+     * @param client
+     * @return
+     */
     public Client save(Client client){
     
         return clientCrudRepository.save(client);
     }
+
+    /**
+     *
+     * @param client
+     */
     public void delete(Client client){
         clientCrudRepository.delete(client);
     }
+
 }

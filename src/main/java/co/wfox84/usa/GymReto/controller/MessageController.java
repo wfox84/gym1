@@ -21,21 +21,37 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/Message")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class MessageController {
-    
+    /**
+     *
+     */
     @Autowired
     private MessageService messageService;
-    
+
+    /**
+     *
+     * @return
+     */
     @GetMapping("/all")
     public List<Message> getMessage(){
         return messageService.getAll();    
     }
 
+    /**
+     *
+     * @param idMessage
+     * @return
+     */
     @GetMapping("/{idMessage}")
     public Optional<Message> getMessage(@PathVariable("id") int idMessage){
         return messageService.getMessage(idMessage);
     
     }
 
+    /**
+     *
+     * @param message
+     * @return
+     */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Message save(@RequestBody Message message){
@@ -43,12 +59,22 @@ public class MessageController {
     
     }
 
+    /**
+     *
+     * @param message
+     * @return
+     */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Message update(@RequestBody Message message){
         return  messageService.update(message);
     }
 
+    /**
+     *
+     * @param idMessage
+     * @return
+     */
     @DeleteMapping("/{idMessage}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("idMessage") int idMessage){

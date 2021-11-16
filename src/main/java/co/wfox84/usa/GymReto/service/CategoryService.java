@@ -20,18 +20,34 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryService {
-    
+    /**
+     *
+     */
     @Autowired
     private CategoryRepository categoryRepository;
-    
+
+    /**
+     *
+     * @return
+     */
     public List<Category> getAll(){
         return categoryRepository.getAll();
     }
-        
+
+    /**
+     *
+      * @param id
+     * @return
+     */
     public Optional<Category> getCategory(int id){
             return categoryRepository.getCategory(id);
     }
-   
+
+    /**
+     *
+     * @param category
+     * @return
+     */
     public Category save(Category  category){
         if(category.getId()==null){
             return categoryRepository.save(category);
@@ -45,6 +61,11 @@ public class CategoryService {
         }
     }
 
+    /**
+     *
+     * @param category
+     * @return
+     */
     public Category update(Category category) {
         if (category.getId() != null) {
             Optional<Category> cate1 = categoryRepository.getCategory(category.getId());
@@ -65,6 +86,11 @@ public class CategoryService {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean deleteCategory(int id){
         Boolean aBoolean =getCategory(id).map(category -> {
             categoryRepository.delete(category);
@@ -73,5 +99,4 @@ public class CategoryService {
         return aBoolean;
     }
 
-    
 }

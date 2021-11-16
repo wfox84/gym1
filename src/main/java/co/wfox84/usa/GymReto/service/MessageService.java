@@ -18,18 +18,34 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MessageService {
-    
+    /**
+     *
+     */
     @Autowired
     private MessageRepository messageRepository;
-    
+
+    /**
+     *
+     * @return
+     */
     public List<Message> getAll(){
         return messageRepository.getAll();
     }
-        
+
+    /**
+     *
+      * @param idMessage
+     * @return
+     */
     public Optional<Message> getMessage(int idMessage){
             return messageRepository.getMessage(idMessage);
     }
-   
+
+    /**
+     *
+     * @param message
+     * @return
+     */
     public Message save(Message  message){
         if(message.getIdMessage()==null){
             return messageRepository.save(message);
@@ -37,14 +53,17 @@ public class MessageService {
             Optional<Message> maux=messageRepository.getMessage(message.getIdMessage());
             if(maux.isEmpty()){
                 return messageRepository.save(message);
-            }else{
+            }else {
                 return message;
-            
             }
-        
         }
-    
     }
+
+    /**
+     *
+     * @param message
+     * @return
+     */
     public Message update(Message message) {
         if (message.getIdMessage()!= null) {
             Optional<Message> mess1 = messageRepository.getMessage(message.getIdMessage());
@@ -64,6 +83,12 @@ public class MessageService {
             return message;
         }
     }
+
+    /**
+     *
+     * @param idMessage
+     * @return
+     */
     public boolean deleteMessage(int idMessage) {
         Boolean aBoolean = getMessage(idMessage).map(message -> {
             messageRepository.delete(message);

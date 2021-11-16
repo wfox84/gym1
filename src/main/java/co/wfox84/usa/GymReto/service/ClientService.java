@@ -20,19 +20,35 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ClientService {
-
+    /**
+     *
+     */
     @Autowired
     private ClientRepository clientRepository;
 
+    /**
+     *
+     * @return
+     */
     public List<Client> getAll() {
 
         return clientRepository.getAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Optional<Client> getClient(int id) {
         return clientRepository.getClient(id);
     }
 
+    /**
+     *
+     * @param client
+     * @return
+     */
     public Client save(Client client) {
         if (client.getIdClient() == null) {
             return clientRepository.save(client);
@@ -42,12 +58,15 @@ public class ClientService {
                 return clientRepository.save(client);
             } else {
                 return client;
-
             }
         }
-
     }
 
+    /**
+     *
+     * @param client
+     * @return
+     */
     public Client update(Client client) {
         if (client.getIdClient() != null) {
             Optional<Client> cli = clientRepository.getClient(client.getIdClient());
@@ -74,6 +93,11 @@ public class ClientService {
         }
     }
 
+    /**
+     *
+     * @param idClient
+     * @return
+     */
     public boolean deleteClient(int idClient) {
         Boolean aBoolean = getClient(idClient).map(client -> {
             clientRepository.delete(client);

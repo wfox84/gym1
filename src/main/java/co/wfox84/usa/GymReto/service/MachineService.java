@@ -20,18 +20,37 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MachineService {
-    
+    /**
+     * @AutoWired used for springboot  Framework. It inject the dependency onto inner beans or collaborating beans
+     * It's check using byName mode if the name is matched
+     *
+     *
+     */
     @Autowired
     private MachineRepository methodsCrud;
-    
+
+    /**
+     *
+     * @return
+     */
     public List<Machine> getAll(){
         return methodsCrud.getAll();
     }
-        
+
+    /**
+     *
+      * @param id of Machine
+     * @return
+     */
     public Optional<Machine> getMachine(int id){
             return methodsCrud.getMachine(id);
     }
-   
+
+    /**
+     *
+     * @param machine
+     * @return
+     */
     public Machine save(Machine  machine){
         if(machine.getId()==null){
             return methodsCrud.save(machine);
@@ -44,6 +63,12 @@ public class MachineService {
             }
         }
     }
+
+    /**
+     *
+     * @param machine
+     * @return
+     */
     public Machine update(Machine machine){
         if(machine.getId()!=null){
             Optional<Machine> machine1=methodsCrud.getMachine(machine.getId());
@@ -73,6 +98,11 @@ public class MachineService {
         }
     }
 
+    /**
+     *
+     * @param id of Machine
+     * @return a Boolean
+     */
     public boolean deleteMachine(int id) {
         Boolean aBoolean = getMachine(id).map(machine -> {
             methodsCrud.delete(machine);
