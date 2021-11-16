@@ -6,9 +6,9 @@
 package co.wfox84.usa.GymReto.controller;
 
 import co.wfox84.usa.GymReto.model.Machine;
-import co.wfox84.usa.GymReto.service.MachineService;
 import java.util.List;
 import java.util.Optional;
+import co.wfox84.usa.GymReto.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/Machine")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+
 public class MachineController {
     /**
      *
@@ -42,7 +43,7 @@ public class MachineController {
      * @return
      */
     @GetMapping("/{id}")
-    public Optional<Machine> getMachine(@PathVariable("id") int id){
+    public Optional<Machine> getMachine(@PathVariable("idMachine") int id){
         return machineService.getMachine(id);
     }
 
@@ -57,16 +58,10 @@ public class MachineController {
         return machineService.save(machine);
     }
 
-    /**
-     *
-     * @param machine
-     * @return
-     */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine update(Machine machine){
+    public Machine update(@RequestBody Machine machine){
         return machineService.update(machine);
-
     }
 
     /**

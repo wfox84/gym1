@@ -20,76 +20,48 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MachineService {
-    /**
-     * @AutoWired used for springboot  Framework. It inject the dependency onto inner beans or collaborating beans
-     * It's check using byName mode if the name is matched
-     *
-     *
-     */
     @Autowired
-    private MachineRepository methodsCrud;
+    private MachineRepository machineRepository;
 
-    /**
-     *
-     * @return
-     */
     public List<Machine> getAll(){
-        return methodsCrud.getAll();
+        return machineRepository.getAll();
     }
-
-    /**
-     *
-      * @param id of Machine
-     * @return
-     */
     public Optional<Machine> getMachine(int id){
-            return methodsCrud.getMachine(id);
+        return machineRepository.getMachine(id);
     }
-
-    /**
-     *
-     * @param machine
-     * @return
-     */
-    public Machine save(Machine  machine){
+    public Machine save(Machine machine){
         if(machine.getId()==null){
-            return methodsCrud.save(machine);
-        }else{
-            Optional<Machine> maux=methodsCrud.getMachine(machine.getId());
-            if(maux.isEmpty()){
-                return methodsCrud.save(machine);
+            return machineRepository.save(machine);
+        }else {
+            Optional<Machine> e=machineRepository.getMachine(machine.getId());
+            if (e.isEmpty()){
+                return machineRepository.save(machine);
             }else{
                 return machine;
             }
         }
     }
-
-    /**
-     *
-     * @param machine
-     * @return
-     */
     public Machine update(Machine machine){
         if(machine.getId()!=null){
-            Optional<Machine> machine1=methodsCrud.getMachine(machine.getId());
-            if(!machine1.isEmpty()){
+            Optional<Machine> e=machineRepository.getMachine(machine.getId());
+            if(!e.isEmpty()){
                 if(machine.getName()!=null){
-                    machine1.get().setName(machine.getName());
+                    e.get().setName(machine.getName());
                 }
                 if(machine.getBrand()!=null){
-                    machine1.get().setBrand(machine.getBrand()); ;
+                    e.get().setBrand(machine.getBrand()); ;
                 }
                 if(machine.getYear() !=null){
-                    machine1.get().setYear(machine.getYear());
+                    e.get().setYear(machine.getYear());
                 }
                 if(machine.getDescription()!=null){
-                    machine1.get().setDescription(machine.getDescription());
+                    e.get().setDescription(machine.getDescription());
                 }
                 if(machine.getCategory()!=null){
-                    machine1.get().setCategory(machine.getCategory());
+                    e.get().setCategory(machine.getCategory());
                 }
-                methodsCrud.save(machine1.get());
-                return machine1.get();
+                machineRepository.save(e.get());
+                return e.get();
             }else{
                 return machine;
             }
@@ -97,17 +69,10 @@ public class MachineService {
             return machine;
         }
     }
-
-    /**
-     *
-     * @param id of Machine
-     * @return a Boolean
-     */
     public boolean deleteMachine(int id) {
-        Boolean aBoolean = getMachine(id).map(machine -> {
-            methodsCrud.delete(machine);
+        return getMachine(id).map(machine -> {
+            machineRepository.delete(machine);
             return true;
         }).orElse(false);
-        return aBoolean;
     }
 }
